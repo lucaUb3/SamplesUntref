@@ -23,7 +23,7 @@ router.get('/detail/:sampleId/', samplesController.detail); /* GET - Product det
 
 /*** CREATE ONE PRODUCT ***/ 
 router.get('/create/', samplesController.create); /* GET - Form to create */
-router.post('/create/', upload.any(), samplesController.store); /* POST - Store in DB */
+router.post('/create/', samplesController.store); /* POST - Store in DB */
 
 /*** EDIT ONE PRODUCT ***/ 
 router.get('/edit/:sampleId', samplesController.edit); /* GET - Form to create */

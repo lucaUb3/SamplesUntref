@@ -1,5 +1,7 @@
 const fs = require('fs');
 const path = require('path');
+let db = require ('../../models');
+let sequelize = db.sequelize;
 //nlet db = require('../database/models');
 //let sequelize = db.sequelize;
 //const samplesFilePath = path.join(__dirname, '../data/samplesDataBase.json');
@@ -33,21 +35,15 @@ const controller = {
 	},
 	
 	// Create -  Method to store
-	store: (req, res, next) => {
-		let samplenuevo = {
-			id: "",
-			...req.body,
-		}
+	store: function (req,res) {
+		db.samples.create ({
+			name: req.body.name,
+			autor: req.body.autor,
+
+		});
+		res.redirect("/samples");
 		
-		let samples = fs.readFileSync(path.join(__dirname, '..', 'data', 'samplesDataBase.json'),
-		'utf-8');
-		samples = JSON.parse(samples);
-		samples = [...samples, samplenuevo];
-		samples = JSON.stringify(samples, null, ' '); //pasar el array a texto, para guardarlo en jason
 		
-		fs.writeFileSync(path.join(__dirname,'..', 'data', 'samplesDataBase.json'), samples);
-		
-		res.redirect('/');
 		
 		
 		// Do the magic
